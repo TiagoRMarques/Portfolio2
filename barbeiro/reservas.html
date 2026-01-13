@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas - Neca Barbearia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="container-header">
+        <a href="index.html"><img src="image-removebg-preview (4) (1).png" alt="Logo Neca Barbearia" class="logo"></a>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="servicos.html">Serviços</a>
+            <a href="galeria.html">Galeria</a>
+            <a href="depoimentos.html">Avaliações</a>
+            <a href="reservas.html" class="ativo">Reservas</a>
+            <a href="minhas_reservas.html">Minhas Reservas</a>
+            <a href="localizacao.html">Localização</a>
+            <a href="contato.html">Contacto</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section id="reserva" class="secao-padrao scroll-animate visible">
+        <div class="conteudo-centrado">
+            <h2 class="titulo-centrado">Reserva Online </h2>
+            <p class="subtitulo-centrado">Escolha o seu serviço e o profissional da sua preferência.</p>
+        </div>
+
+        <div class="container-formulario">
+            <form id="form-reserva">
+                <label>Nome Completo:</label>
+                <input type="text" id="nome" placeholder="Ex: João Silva" required>
+
+                <label>Email de Contacto:</label>
+                <input type="email" id="email" placeholder="exemplo@email.com" required>
+
+                <div class="form-row">
+                    <div>
+                        <label>Serviço:</label>
+                        <select id="servico" required>
+                            <option value="Corte Masculino">Corte Masculino</option>
+                            <option value="Barba">Barba</option>
+                            <option value="Tratamento Capilar">Tratamento Capilar</option>
+                        </select>
+                    </div>
+                    <div>
+                        <label>Barbeiro:</label>
+                        <select id="barbeiro" required>
+                            <option value="Tiago">Tiago</option>
+                            <option value="Carlos">Carlos</option>
+                            <option value="João">João</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="form-row">
+                    <div>
+                        <label>Dia:</label>
+                        <input type="date" id="dia" required>
+                    </div>
+                    <div>
+                        <label>Hora:</label>
+                        <input type="time" id="hora" required>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-reserva">Confirmar Reserva ✅</button>
+            </form>
+        </div>
+
+        <div id="reservas-lista"></div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2025 Neca Barbearia — Todos os direitos reservados </p>
+</footer>
+
+<script src="script.js"></script>
+</body>
+</html>

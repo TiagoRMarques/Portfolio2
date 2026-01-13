@@ -1,0 +1,65 @@
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content below * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * Delete the template below * * * * * * * * * -->
+<!-- * * * * * * * to get started with your project! * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+
+
+
+<div class="container my-4">
+  <h2>{{ title }}</h2>
+
+  <table class="table table-bordered table-hover text-center align-middle">
+    <thead class="table-dark">
+  <tr>
+    <th>Ticker</th>
+    <th>Data de Compra</th>
+    <th>Quantidade</th>
+    <th>PU (€)</th>
+    <th>Total Compra (€)</th>
+    <th>Cotação Atual (€)</th>
+    <th>Valor Atual (€)</th>
+    <th>Variação (%)</th>
+  </tr>
+</thead>
+<tbody>
+  <tr *ngFor="let acao of acoes">
+    <td>{{ acao.ticker }}</td>
+    <td>{{ acao.dataCompra }}</td>
+    <td>{{ acao.quantidade }}</td>
+    <td>{{ acao.precoCompra }}</td>
+    <td>{{ acao.precoCompra * acao.quantidade }}</td>
+    <td>{{ acao.cotacaoAtual }}</td>
+    <td>{{ acao.cotacaoAtual * acao.quantidade }}</td>
+ <td [ngStyle]="{ color: acao.variacaoPercentagem >= 0 ? 'green' : 'red', 'font-weight': 'bold' }">
+  {{ acao.variacaoPercentagem | number:'1.2-2' }}%
+</td>
+  </tr>
+</tbody>
+
+    <tfoot>
+  <tr>
+    <th colspan="4">Totais</th>
+    <th>{{ totalCompra | number:'1.2-2' }} €</th>
+    <th></th>
+    <th>{{ valorAtual | number:'1.2-2' }} €</th>
+    <th [ngStyle]="{ color: variacaoTotal >= 0 ? 'green' : 'red' }">
+  {{ variacaoTotal | number:'1.2-2' }}%
+</th>
+  </tr>
+</tfoot>
+  </table>
+
+  <canvas id="carteiraChart"></canvas>
+</div>
+
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * The content above * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * is only a placeholder * * * * * * * * * * * -->
+<!-- * * * * * * * * * * and can be replaced.  * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * End of Placeholder  * * * * * * * * * * * * -->
+<!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * -->

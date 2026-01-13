@@ -1,0 +1,165 @@
+
+<style>
+  .container {
+  max-width: 1000px;
+  margin: auto;
+  background-color: #fdfdfd;
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+/* Título */
+h2 {
+  font-weight: 700;
+  color: #700;
+}
+
+/* Tabela */
+.table {
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+/* Cabeçalho escuro com bordas */
+.table thead.table-dark th {
+  background-color: #200;
+  color: white;
+  font-size: 0.95rem;
+  letter-spacing: 0.5px;
+  border: none;
+}
+
+/* Linhas alternadas */
+.table tbody tr:nth-child(even) {
+  background-color: #f18;
+}
+
+/* Linhas ao passar o mouse */
+.table-hover tbody tr:hover {
+  background-color: #e2e6ea;
+}
+
+/* Células */
+.table td, .table th {
+  vertical-align: middle;
+  padding: 5px;
+}
+
+/* Rodapé */
+tfoot td {
+  background-color: #e9ecef;
+  font-size: 1rem;
+}
+
+/* Coloração condicional dos percentuais */
+td[style*="color:"] {
+  font-weight: bold;
+}
+
+/* Verde/Vermelho */
+td[style*="color:green"] {
+  color: #198754 !important;
+}
+
+td[style*="color:red"] {
+  color: #dc3545 !important;
+}
+</style>
+
+<div class="container my-4">
+  <h2 class="mb-4 text-center">Tabela da Carteira de Ações</h2>
+
+  <table class="table table-bordered table-hover text-center align-middle">
+    <thead class="table-dark">
+      <tr>
+        <th>Ticker</th>
+        <th>Empresa</th>
+        <th>Data da Compra</th>
+        <th>Quantidade</th>
+        <th>PU</th>
+        <th>Total Compra</th>
+        <th>Cotação Atual</th>
+        <th>Valor Atual</th>
+        <th>Variação (%)</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr *ngFor="let acao of acoes">
+        <td>{{ acao.ticker }}</td>
+        <td>{{ acao.empresa }}</td>
+        <td>{{ acao.dataCompra }}</td>
+        <td>{{ acao.quantidade }}</td>
+        <td>{{ acao.precoCompra | number: '1.2-2' }} €</td>
+        <td>{{ acao.quantidade * acao.precoCompra | number: '1.2-2' }} €</td>
+        <td>{{ acao.cotacaoAtual | number: '1.2-2' }} €</td>
+        <td>{{ acao.quantidade * acao.cotacaoAtual! | number: '1.2-2' }} €</td>
+        <td [style.color]="getColor(acao.variacaoPercentagem!)">
+          {{ acao.variacaoPercentagem! | number: '1.2-2' }}%
+        </td>
+      </tr>
+    </tbody>
+    <tfoot class="fw-bold table-light">
+      <tr>
+        <td colspan="5">TOTAL</td>
+        <td>{{ totalCompra | number: '1.2-2' }} €</td>
+        <td></td>
+        <td>{{ totalAtual | number: '1.2-2' }} €</td>
+        <td [style.color]="getColor(variacaoTotal)">
+          {{ variacaoTotal | number: '1.2-2' }}%
+        </td>
+      </tr>
+    </tfoot>
+  </table>
+</div>
+
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Gráfico Carteira de Ações</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h2>Comparação: Total de Compra vs. Valor Atual</h2>
+  <canvas id="carteiraChart" width="800" height="400"></canvas>
+
+  <script>
+    const ctx = document.getElementById('carteiraChart').getContext('2d');
+    const carteiraChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['Microsoft', 'TESLA', 'Amazon', 'NVIDIA', 'Apple', 'Netflix', 'Nike', 'Spotify', "McDonald's", 'Ford'],
+        datasets: [
+          {
+            label: 'Total Compra (€)',
+            data: [500, 400, 375, 300, 300, 400, 560, 440, 380, 320],
+            backgroundColor: 'rgba(54, 162, 235, 0.6)',
+            borderColor: 'rgba(54, 162, 235, 1)',
+            borderWidth: 1
+          },
+          {
+            label: 'Valor Atual (€)',
+            data: [600, 360, 405, 280, 200, 375, 640, 462, 420, 290],
+            backgroundColor: 'rgba(75, 192, 192, 0.6)',
+            borderColor: 'rgba(75, 192, 192, 1)',
+            borderWidth: 1
+          }
+        ]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            beginAtZero: true,
+            title: {
+              display: true,
+              text: '€ (euros)'
+            }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

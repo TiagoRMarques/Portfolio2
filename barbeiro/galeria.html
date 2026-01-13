@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Portfólio - Neca Barbearia</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<header>
+    <div class="container-header">
+        <a href="index.html"><img src="image-removebg-preview (4) (1).png" alt="Logo Neca Barbearia" class="logo"></a>
+        <nav>
+            <a href="index.html">Início</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="servicos.html">Serviços</a>
+            <a href="galeria.html" class="ativo">Galeria</a> <a href="depoimentos.html">Avaliações</a>
+            <a href="reservas.html">Reservas</a>
+                        <a href="minhas_reservas.html">Minhas Reservas</a>
+
+            <a href="localizacao.html">Localização</a>
+            <a href="contato.html">Contacto</a>
+        </nav>
+    </div>
+</header>
+
+<main>
+    <section id="galeria" class="secao-padrao scroll-animate visible">
+        <div class="conteudo-centrado">
+            <h2 class="titulo-centrado">O Nosso Trabalho </h2>
+            <p class="subtitulo-centrado">A arte de transformar estilo em confiança através de cada corte.</p>
+        </div>
+
+        <div class="grid-galeria">
+            <img src="/imagens/cabelo2.jpeg" alt="Corte moderno" class="galeria-img" data-full="imagens/galeria1.jpg">
+            <img src="/imagens/cabelo3.jpg" alt="Detalhe de barba" class="galeria-img" data-full="imagens/galeria2.jpg">
+            <img src="/imagens/cabelo4.jpg" alt="Ambiente Neca Barbearia" class="galeria-img" data-full="imagens/galeria3.jpg">
+        </div>
+    </section>
+</main>
+
+<footer>
+    <p>&copy; 2025 Neca Barbearia — Todos os direitos reservados </p>
+</footer>
+
+<div id="modal-galeria" class="modal">
+    <span class="modal-fechar">&times;</span>
+    <img class="modal-conteudo" id="modal-imagem" alt="">
+    <div id="modal-legenda"></div>
+</div>
+
+<script src="script.js"></script>
+</body>
+</html>

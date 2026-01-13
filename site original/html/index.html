@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="pt-pt">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>TFootShop</title>
+
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+
+<style>
+/* ===== BODY ===== */
+body {
+  background-color: #f8f9fa;
+  scroll-behavior: smooth;
+  font-family: system-ui, sans-serif;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+/* ===== DARK MODE ===== */
+body.dark-mode {
+  background-color: #121212;
+  color: #eee;
+}
+body.dark-mode .card { background-color: #1e1e1e; color: #eee; }
+body.dark-mode .btn-dark { background-color: #333; color: #fff; }
+body.dark-mode .navbar { background-color: #111 !important; }
+
+/* ===== NAVBAR ===== */
+.navbar { background-color: #000 !important; }
+.nav-link, .navbar-brand { color: #fff !important; }
+.nav-link.active { background-color: #212529 !important; }
+.navbar-brand img { height: 70px; animation: growFade 1.5s ease-in-out; }
+.navbar-nav img { height: 40px; transition: transform 0.3s; }
+.nav-item:hover img { transform: scale(1.2); }
+@keyframes growFade {
+  from { transform: scale(0.5); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
+
+/* ===== HERO ===== */
+.hero {
+  position: relative;
+  background-color: #000;
+  color: white;
+  text-align: center;
+  padding: 120px 20px;
+  overflow: hidden;
+}
+/* Overlay escuro */
+.hero::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-image: url("html/fotos/logo/logo 1.png");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: 450px;
+  opacity: 0.15;              /* suavidade do logo */
+  filter: blur(1px);          /* efeito suave */
+}
+
+.hero::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    rgba(0,0,0,0.75),
+    rgba(0,0,0,0.75)
+  );
+}
+
+/* Conteúdo acima de tudo */
+.hero * {
+  position: relative;
+  z-index: 1;
+}
+
+/* ===== PRODUTOS ===== */
+.card {
+  transition: transform 0.3s, box-shadow 0.3s;
+  cursor: pointer;
+  border-radius: 12px;
+  overflow: hidden;
+}
+.card:hover {
+  transform: translateY(-10px) scale(1.02);
+  box-shadow: 0 15px 25px rgba(0,0,0,0.3);
+}
+.card img {
+  transition: transform 0.3s;
+  max-height: 400px;
+  object-fit: contain;
+  background: #f1f1f1;
+  padding: 10px;
+}
+.card:hover img { transform: scale(1.05); }
+
+/* ===== TITULOS ===== */
+.card-title {
+  color: #000;
+}
+body.dark-mode .card-title {
+  color: #fff;
+}
+
+/* ===== FAVORITOS ===== */
+.fav-btn {
+  border: none;
+  background: none;
+  font-size: 24px;
+  cursor: pointer;
+  transition: transform 0.2s, color 0.2s;
+  color: #999;        /* estrela vazia */
+  vertical-align: middle;
+  margin-left: 10px;
+}
+.fav-btn:hover {
+  transform: scale(1.4);
+}.fav-btn.active {
+  color: gold;        /* estrela cheia */
+  animation: favPop 0.3s ease-in-out;
+}
+@keyframes favPop {
+  0% { transform: scale(1); }
+  50% { transform: scale(1.6); }
+  100% { transform: scale(1); }
+}
+
+/* ===== SKELETON LOADING (CORRIGIDO) ===== */
+.card.skeleton img {
+  background-color: #d4d4d4;
+}
+
+/* ===== FOOTER ===== */
+footer {
+  background-color: #000;
+  color: #fff;
+  padding: 20px 0;
+  text-align: center;
+}
+
+/* ===== HIDE / ANIMATION PRODUTOS ===== */
+.produto {
+  transition: opacity 0.3s, transform 0.3s;
+}
+.produto.hide {
+  display: none !important;
+  opacity: 0;
+  transform: scale(0.95);
+  pointer-events: none;
+  height: 0;
+  margin: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+/* ===== MINI CART ===== */
+#miniCart {
+  position: absolute;
+  top: 60px;
+  right: 10px;
+  width: 250px;
+  max-height: 300px;
+  overflow-y: auto;
+  background: #000;
+  color: #fff;
+  border-radius: 8px;
+  padding: 10px;
+  display: none;
+  z-index: 1100;
+}
+#miniCart li {
+  padding: 5px 0;
+  border-bottom: 1px solid #444;
+}
+
+/* ===== SEARCH ===== */
+#searchBox {
+  width: 300px;
+  max-width: 100%;
+}
+
+/* ===== CARD BODY ===== */
+.card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+</style>
+
+</head>
+<body>
+
+<!-- ===== NAVBAR ===== -->
+<nav class="navbar navbar-expand-lg navbar-dark px-4 sticky-top">
+  <div class="container-fluid">
+   
+   
+   
+   <div class="d-flex align-items-center gap-3">
+  <!-- Botão Portfolio -->
+<a href="../../index.html" class="btn btn-outline-light">Voltar</a>  
+  </a>
+
+  <!-- Logotipo -->
+  <a class="navbar-brand d-flex align-items-center gap-2" href="#">
+    <img src="fotos/Logo/logo (2) br.png" alt="Logo">
+    TFootShop
+  </a>
+</div>
+
+
+    <div class="collapse navbar-collapse show">
+    <ul class="navbar-nav me-auto align-items-center flex-nowrap" style="overflow-x:auto;">
+  <!-- Liga Portugal -->
+  <li class="nav-item text-center mx-2">
+    <a class="nav-link" data-categoria="liga-portugal">
+      <img src="logos das ligas/ligaportugal.png" alt="Liga Portugal" class="liga-icon">
+      <span>Liga Portugal</span>
+    </a>
+  </li>
+
+  <!-- La Liga -->
+  <li class="nav-item text-center mx-2">
+    <a class="nav-link" data-categoria="la-liga">
+      <img src="logos das ligas/la liha.png" alt="La Liga" class="liga-icon">
+      <span>La Liga</span>
+    </a>
+  </li>
+
+  <!-- Ligue 1 -->
+  <li class="nav-item text-center mx-2">
+    <a class="nav-link" data-categoria="ligue-1">
+      <img src="logos das ligas/ligue1.png" alt="Ligue 1" class="liga-icon">
+      <span>Ligue 1</span>
+    </a>
+  </li>
+
+  <!-- Serie A -->
+  <li class="nav-item text-center mx-2">
+    <a class="nav-link" data-categoria="serie-a">
+      <img src="logos das ligas/serie a.png" alt="Serie A" class="liga-icon">
+      <span>Serie A</span>
+    </a>
+  </li>
+
+  <!-- Bundesliga -->
+  <li class="nav-item text-center mx-2">
+    <a class="nav-link" data-categoria="bundesliga">
+      <img src="logos das ligas/bundesliga.png" alt="Bundesliga" class="liga-icon">
+      <span>Bundesliga</span>
+    </a>
+  </li>
+
+  <!-- Premier League -->
+  <li class="nav-item text-center mx-2">
+    <a class="nav-link" data-categoria="premier-league">
+      <img src="logos das ligas/premier.png" alt="Premier League" class="liga-icon">
+      <span>Premier League</span>
+    </a>
+  </li>
+
+  <!-- Todas -->
+  <li class="nav-item text-center mx-2">
+    <a class="nav-link active" data-categoria="todas">
+      <span>Todas</span>
+    </a>
+  </li>
+
+  <!-- Favoritos -->
+  <li class="nav-item text-center mx-2">
+    <a class="nav-link" data-categoria="favoritos">
+      <span>Favoritos</span>
+    </a>
+  </li>
+</ul>
+
+
+        <!-- Carrinho -->
+   <div class="ms-2">
+  <button class="btn btn-outline-light" id="btnCarrinho">
+    🛒 <span id="cartCount">0</span>
+  </button>
+</div>
+
+   
+
+      <!-- Barra de pesquisa -->
+      <form class="d-flex ms-3" onsubmit="return false;">
+        <input class="form-control me-2" id="searchBox" placeholder="Buscar..." style="min-width:200px;">
+        <button class="btn btn-outline-light">🔍</button>
+      </form>
+    </div>
+  </div>
+</nav>
+
+
+<!-- ===== MINI CART PREVIEW ===== -->
+<div id="miniCart">
+  <ul id="miniCartList" class="list-unstyled mb-0"></ul>
+</div>
+
+<!-- ===== HERO ===== -->
+<section class="hero">
+  <h1>TFootShop</h1>
+  <p>As melhores camisolas de futebol do mundo</p>
+  <a href="#loja" class="btn btn-outline-light">Ver Produtos</a>
+</section>
+
+<!-- Produtos -->
+<div class="container my-5" id="loja">
+  <div class="row g-4" id="produtos">
+
+    <!-- Liga Portugal -->
+    <div class="col-md-4 produto" data-categoria="liga-portugal">
+      <div class="card h-100 shadow-sm skeleton">
+        <img src="fotos/LIGA PORTUGAL/FC Porto Princ 2024 2025.png" class="card-img-top" alt="FC Porto Principal 2024-2025">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="card-title mb-0">FC Porto Principal 2024-2025</h5>
+            <button class="fav-btn" onclick="toggleFav(this,'FC Porto Principal 2024-2025')">🤍</button>
+          </div>
+        
+          <p class="text-success fw-bold">€35</p>
+          
+          <button class="btn btn-dark w-100" onclick="comprar('FC Porto Principal 2024-2025')">Comprar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 produto" data-categoria="liga-portugal">
+      <div class="card h-100 shadow-sm skeleton">
+        <img src="fotos/LIGA PORTUGAL/FC Porto Secun 2024 2025.png" class="card-img-top" alt="FC Porto Secundária 2024-2025">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="card-title mb-0">FC Porto Secundária 2024-2025</h5>
+            <button class="fav-btn" onclick="toggleFav(this,'FC Porto Secundária 2024-2025')">🤍</button>
+          </div>
+          <p class="text-success fw-bold">€35</p>
+          <button class="btn btn-dark w-100" onclick="comprar('FC Porto Secundária 2024-2025')">Comprar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 produto" data-categoria="liga-portugal">
+      <div class="card h-100 shadow-sm skeleton">
+        <img src="fotos/LIGA PORTUGAL/SL Benfica Princ 2024 2025.png" class="card-img-top" alt="SL Benfica Principal 2024-2025">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="card-title mb-0">SL Benfica Principal 2024-2025</h5>
+            <button class="fav-btn" onclick="toggleFav(this,'SL Benfica Principal 2024-2025')">🤍</button>
+          </div>
+          <p class="text-success fw-bold">€35</p>
+          <button class="btn btn-dark w-100" onclick="comprar('SL Benfica Principal 2024-2025')">Comprar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 produto" data-categoria="liga-portugal">
+      <div class="card h-100 shadow-sm skeleton">
+        <img src="fotos/LIGA PORTUGAL/SL Benfica Secun 2024 2025.png" class="card-img-top" alt="SL Benfica Secundária 2024-2025">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="card-title mb-0">SL Benfica Secundária 2024-2025</h5>
+            <button class="fav-btn" onclick="toggleFav(this,'SL Benfica Secundária 2024-2025')">🤍</button>
+          </div>
+          <p class="text-success fw-bold">€35</p>
+          <button class="btn btn-dark w-100" onclick="comprar('SL Benfica Secundária 2024-2025')">Comprar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 produto" data-categoria="liga-portugal">
+      <div class="card h-100 shadow-sm skeleton">
+        <img src="fotos/LIGA PORTUGAL/Sporting Princ 2024 2025.png" class="card-img-top" alt="Sporting Principal 2024-2025">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="card-title mb-0">Sporting Principal 2024-2025</h5>
+            <button class="fav-btn" onclick="toggleFav(this,'Sporting Principal 2024-2025')">🤍</button>
+          </div>
+          <p class="text-success fw-bold">€35</p>
+          <button class="btn btn-dark w-100" onclick="comprar('Sporting Principal 2024-2025')">Comprar</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-4 produto" data-categoria="liga-portugal">
+      <div class="card h-100 shadow-sm skeleton">
+        <img src="fotos/LIGA PORTUGAL/Sporting Secun 2024 2025.png" class="card-img-top" alt="Sporting Secundária 2024-2025">
+        <div class="card-body">
+          <div class="d-flex justify-content-between align-items-center mb-2">
+            <h5 class="card-title mb-0">Sporting Secundária 2024-2025</h5>
+            <button class="fav-btn" onclick="toggleFav(this,'Sporting Secundária 2024-2025')">🤍</button>
+          </div>
+          <p class="text-success fw-bold">€35</p>
+          <button class="btn btn-dark w-100" onclick="comprar('Sporting Secundária 2024-2025')">Comprar</button>
+        </div>
+      </div>
+    </div>
+
+
+<div class="col-md-4 produto" data-categoria="la-liga">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/espanhola (2).png" class="card-img-top" alt="Real Madrid Principal">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Real Madrid Principal 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Real Madrid Principal 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Real Madrid Principal 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4 produto" data-categoria="la-liga">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/espanhola (1).png" class="card-img-top" alt="Real Madrid Secundária">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Real Madrid Secundária 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Real Madrid Secundária 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Real Madrid Secundária 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4 produto" data-categoria="la-liga">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/espanhola (3).png" class="card-img-top" alt="Barcelona Principal">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Barcelona Principal 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Barcelona Principal 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Barcelona Principal 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4 produto" data-categoria="la-liga">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/espanhola (4).png" class="card-img-top" alt="Barcelona Secundária">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Barcelona Secundária 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Barcelona Secundária 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Barcelona Secundária 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4 produto" data-categoria="la-liga">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/espanhola (6).png" class="card-img-top" alt="Atlético Madrid Principal">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Atlético Madrid Principal 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Atlético Madrid Principal 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Atlético Madrid Principal 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4 produto" data-categoria="la-liga">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/espanhola (5).png" class="card-img-top" alt="Atlético Madrid Secundária">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Atlético Madrid Secundária 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Atlético Madrid Secundária 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Atlético Madrid Secundária 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="col-md-4 produto" data-categoria="ligue-1">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/frança (2).png" class="card-img-top" alt="PSG Principal">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">PSG Principal 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'PSG Principal 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('PSG Principal 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="col-md-4 produto" data-categoria="ligue-1">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/frança (1).png" class="card-img-top" alt="PSG Secundária 2024-2025">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">PSG Secundária 2024-2025</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'PSG Secundária 2024-2025')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('PSG Secundária 2024-2025')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<div class="col-md-4 produto" data-categoria="premier-league">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/inglaterra (2).png" class="card-img-top" alt="Manchester United Principal">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Man. United Principal 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Man. United Principal 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Man. United Principal 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4 produto" data-categoria="premier-league">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/inglaterra (3).png" class="card-img-top" alt="Manchester United Secundária">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Man. United Secundária 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Man. United Secundária 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Man. United Secundária 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4 produto" data-categoria="premier-league">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/inglaterra (4).png" class="card-img-top" alt="Man City Principal">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Manchester City Principal 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Manchester City Princ. 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Manchester City Princ. 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4 produto" data-categoria="premier-league">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/inglaterra (5).png" class="card-img-top" alt="Arsenal Principal">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Manchester City Secundária 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Manchester City Secundária 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Manchester City Secundária 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4 produto" data-categoria="premier-league">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/inglaterra (6).png" class="card-img-top" alt="Liverpool Principal 24/25">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Liverpool Principal 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Liverpool Principal 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Liverpool Principal 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4 produto" data-categoria="premier-league">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/inglaterra (7).png" class="card-img-top" alt="Liverpool Secundária 24/25">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Liverpool Secundária 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Liverpool Secundária 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Liverpool Secundária 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4 produto" data-categoria="premier-league">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/inglaterra (8).png" class="card-img-top" alt="Chelsea Principal 24/25">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Chelsea Principal 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Chelsea Principal 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Chelsea Principal 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4 produto" data-categoria="premier-league">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/inglaterra (9).png" class="card-img-top" alt="Chelsea Secundária 24/25">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Chelsea Secundária 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Chelsea Secundária 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Chelsea Secundária 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4 produto" data-categoria="premier-league">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/inglaterra (10).png" class="card-img-top" alt="Arsenal Principal 24/25">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Arsenal Principal 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Arsenal Principal 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Arsenal Principal 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4 produto" data-categoria="premier-league">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/inglaterra (11).png" class="card-img-top" alt="Arsenal Secundária 24/25">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Arsenal Secundária 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Arsenal Secundária 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Arsenal Secundária 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4 produto" data-categoria="premier-league">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/inglaterra (1).png" class="card-img-top" alt="Spurs Principal 24/25">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Spurs Principal 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Spurs Principal 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Spurs Principal 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4 produto" data-categoria="premier-league">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/inglaterra (12).png" class="card-img-top" alt="Spurs Secundária 24/25">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Spurs Secundária 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Spurs Secundária 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Spurs Secundária 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+<div class="col-md-4 produto" data-categoria="serie-a">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/italia (2).png" class="card-img-top" alt="Juventus Principal">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Juventus Principal 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Juventus Principal 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Juventus Principal 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="col-md-4 produto" data-categoria="serie-a">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/italia (3).png" class="card-img-top" alt="Juventus Secundária 24/25">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Juventus Secundária 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Juventus Secundária 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Juventus Secundária 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<div class="col-md-4 produto" data-categoria="serie-a">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/italia (6).png" class="card-img-top" alt="Inter Milan Principal">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Inter Milan Principal 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Inter Milan Principal 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Inter Milan Principal 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="col-md-4 produto" data-categoria="serie-a">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/italia (7).png" class="card-img-top" alt="Inter Milan Secundária 24/25">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Inter Milan Secundária 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Inter Milan Secundária 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Inter Milan Secundária 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+
+<div class="col-md-4 produto" data-categoria="serie-a">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/italia (4).png" class="card-img-top" alt="AC Milan Principal 24/25">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">AC Milan Principal 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'AC Milan Principal 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('AC Milan Principal 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4 produto" data-categoria="serie-a">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/italia (5).png" class="card-img-top" alt="AC Milan Secundária 24/25">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">AC Milan Secundária 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'AC Milan Secundária 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('AC Milan Secundária 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4 produto" data-categoria="serie-a">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/italia (1).png" class="card-img-top" alt="Nápoles Principal 24/25">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Nápoles Principal 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Nápoles Principal 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Nápoles Principal 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4 produto" data-categoria="serie-a">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/italia (8).png" class="card-img-top" alt="Nápoles Secundária 24/25">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Nápoles Secundária 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Nápoles Secundária 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Nápoles Secundária 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+
+
+<div class="col-md-4 produto" data-categoria="bundesliga">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/alemanha (1).png" class="card-img-top" alt="Bayern Muchen Principal">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Bayern München Principal</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Bayern München Principal')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Bayern München Principal')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+<div class="col-md-4 produto" data-categoria="bundesliga">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/alemanha (2).png" class="card-img-top" alt="Bayern München Secundária 24/25">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Bayern München Secundária 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Bayern München Secundária 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Bayern München Secundária 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4 produto" data-categoria="bundesliga">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/alemanha (3).png" class="card-img-top" alt="Dortmund Principal 24/25">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Dortmund Principal 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Dortmund Principal 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Dortmund Principal 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+<div class="col-md-4 produto" data-categoria="bundesliga">
+  <div class="card h-100 shadow-sm skeleton">
+    <img src="/site original/html/camisolas_restantes/alemanha (4).png" class="card-img-top" alt="Dortmund Secundária 24/25">
+    <div class="card-body">
+      <div class="d-flex justify-content-between align-items-center mb-2">
+        <h5 class="card-title mb-0">Dortmund Secundária 24/25</h5>
+        <button class="fav-btn" onclick="toggleFav(this,'Dortmund Secundária 24/25')">🤍</button>
+      </div>
+      <p class="text-success fw-bold">€35</p>
+      <button class="btn btn-dark w-100" onclick="comprar('Dortmund Secundária 24/25')">Comprar</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+</div>
+
+
+
+<!-- ===== FOOTER ===== -->
+<footer>© 2025 TFootShop</footer>
+
+<!-- ===== MODAIS ===== -->
+<div class="modal fade" id="compraModal" tabindex="-1" aria-labelledby="compraModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="compraModalLabel">Comprar Produto</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body text-center">
+        <img id="modalImg" src="" class="img-fluid mb-3" style="max-height:250px;" />
+        <h5 id="modalNome"></h5>
+        <p class="text-success fw-bold" id="modalPreco"></p>
+
+        <div class="mb-3">
+          <label for="modalTamanho" class="form-label">Escolhe o tamanho:</label>
+          <select id="modalTamanho" class="form-select">
+            <option value="S">S</option>
+            <option value="M" selected>M</option>
+            <option value="L">L</option>
+            <option value="XL">XL</option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label for="modalPersonalizacao" class="form-label">Personalização <span class="text-success fw-bold">+5€</span></label>
+          <input type="text" id="modalPersonalizacao" class="form-control" placeholder="Nome ou número">
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Cancelar</button>
+        <button class="btn btn-dark" onclick="adicionarCarrinhoModal()">Adicionar ao Carrinho</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="modal fade" id="carrinhoModal" tabindex="-1" aria-labelledby="carrinhoModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="carrinhoModalLabel">Carrinho</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Fechar"></button>
+      </div>
+      <div class="modal-body">
+        <ul id="listaCarrinho" class="list-group mb-3"></ul>
+        <div class="d-flex justify-content-between fw-bold">
+          <span>Total:</span>
+          <span id="totalCarrinho">0€</span>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button class="btn btn-secondary" data-bs-dismiss="modal">Fechar</button>
+        <button class="btn btn-dark" onclick="checkoutCarrinho()">Finalizar Compra</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ===== TOAST ===== -->
+<div id="toast" class="position-fixed bottom-0 end-0 p-3" style="z-index: 1055;">
+  <div class="toast align-items-center text-white bg-dark border-0" role="alert">
+    <div class="d-flex">
+      <div class="toast-body" id="toastMsg"></div>
+      <button type="button" class="btn-close btn-close-white me-2 m-auto" data-bs-dismiss="toast"></button>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+// ==== LOGIN / FAVORITOS / CARRINHO ====
+// ==== LOGIN / FAVORITOS / CARRINHO ====
+
+
+function toggleFav(btn, nome) {
+  let favs = JSON.parse(localStorage.getItem("favoritos")) || [];
+  if (favs.includes(nome)) { 
+    favs = favs.filter(f => f!==nome); 
+    btn.classList.remove("active"); 
+    btn.innerHTML="☆"; 
+  } else { 
+    favs.push(nome); 
+    btn.classList.add("active"); 
+    btn.innerHTML="★"; 
+  }
+  localStorage.setItem("favoritos", JSON.stringify(favs));
+}
+
+let carrinho = JSON.parse(localStorage.getItem("carrinho")) || [];
+function atualizarCarrinho() { document.getElementById("cartCount").innerText = carrinho.length; }
+
+// ==== MODAL / COMPRA ====
+function comprar(nome) {
+  const card = [...document.querySelectorAll(".produto")]
+    .find(p => p.querySelector(".card-title").innerText === nome);
+
+  if (!card) return;
+
+  document.getElementById("modalImg").src = card.querySelector("img").src;
+  document.getElementById("modalNome").innerText = nome;
+  document.getElementById("modalPreco").innerText = card.querySelector("p").innerText;
+  document.getElementById("modalTamanho").value = "M";
+  document.getElementById("modalPersonalizacao").value = "";
+
+  bootstrap.Modal
+    .getOrCreateInstance(document.getElementById('compraModal'))
+    .show();
+}
+
+
+function adicionarCarrinhoModal() {
+  const nome = document.getElementById("modalNome").innerText;
+  let preco = parseFloat(document.getElementById("modalPreco").innerText.replace('€',''));
+  const tamanho = document.getElementById("modalTamanho").value;
+  const personalizacao = document.getElementById("modalPersonalizacao").value.trim();
+  let nomeCompleto = nome;
+  if(personalizacao){ nomeCompleto += ` (${personalizacao})`; preco += 5; }
+  nomeCompleto += ` [${tamanho}]`;
+  carrinho.push({ nome: nomeCompleto, preco });
+  localStorage.setItem("carrinho", JSON.stringify(carrinho));
+  atualizarCarrinho();
+  showToast("Produto adicionado 🛒");
+  bootstrap.Modal.getInstance(document.getElementById('compraModal')).hide();
+}
+
+// ==== CARRINHO ====
+function abrirCarrinho() {
+  const lista = document.getElementById("listaCarrinho");
+  const totalSpan = document.getElementById("totalCarrinho");
+
+  lista.innerHTML = "";
+  let total = 0;
+
+  carrinho.forEach((p, i) => {
+    total += p.preco;
+    lista.innerHTML += `
+      <li class="list-group-item d-flex justify-content-between align-items-center">
+        ${p.nome} - €${p.preco}
+        <button class="btn btn-sm btn-danger" onclick="removerItem(${i})">❌</button>
+      </li>`;
+  });
+
+  totalSpan.innerText = total + "€";
+
+  bootstrap.Modal
+    .getOrCreateInstance(document.getElementById('carrinhoModal'))
+    .show();
+}
+
+
+function removerItem(i){ 
+  carrinho.splice(i,1); 
+  localStorage.setItem("carrinho",JSON.stringify(carrinho)); 
+  abrirCarrinho(); 
+  atualizarCarrinho(); 
+}
+
+function checkoutCarrinho(){ 
+  if(carrinho.length===0){ showToast("Carrinho vazio"); return; } 
+  showToast("Compra finalizada ✅"); 
+  carrinho=[]; 
+  localStorage.removeItem("carrinho"); 
+  atualizarCarrinho(); 
+  bootstrap.Modal.getInstance(document.getElementById('carrinhoModal')).hide(); 
+}
+
+// ==== CATEGORIAS ====
+document.querySelectorAll(".nav-link").forEach(link=>{
+  link.addEventListener("click",()=>{
+    document.querySelectorAll(".nav-link").forEach(l=>l.classList.remove("active")); 
+    link.classList.add("active");
+    const categoria=link.dataset.categoria;
+    const favs=JSON.parse(localStorage.getItem("favoritos"))||[];
+    document.querySelectorAll(".produto").forEach(p=>{
+      const nome=p.querySelector(".card-title").innerText;
+      if(categoria==="todas") p.classList.remove("hide");
+      else if(categoria==="favoritos") favs.includes(nome)?p.classList.remove("hide"):p.classList.add("hide");
+      else p.dataset.categoria===categoria?p.classList.remove("hide"):p.classList.add("hide");
+    });
+  });
+});
+
+// ==== PESQUISA ====
+document.getElementById("searchBox").addEventListener("keyup", e=>{
+  const termo=e.target.value.toLowerCase();
+  document.querySelectorAll(".produto").forEach(p=>{
+    const titulo=p.querySelector(".card-title").innerText.toLowerCase();
+    titulo.includes(termo)?p.classList.remove("hide"):p.classList.add("hide");
+  });
+});
+
+// ==== FAVORITOS INICIAL ====
+// ==== FAVORITOS INICIAL CORRIGIDO ====
+document.querySelectorAll(".fav-btn").forEach(btn => {
+  const nome = btn.parentElement.querySelector(".card-title").innerText;
+  const favs = JSON.parse(localStorage.getItem("favoritos")) || [];
+
+  if (favs.includes(nome)) {
+    btn.classList.add("active");
+    btn.innerHTML = "★"; // estrela cheia
+  } else {
+    btn.classList.remove("active");
+    btn.innerHTML = "☆"; // estrela vazia
+  }
+});
+
+
+// ==== TOAST ====
+function showToast(msg){
+  document.getElementById("toastMsg").innerText=msg;
+  let toastEl=document.querySelector("#toast .toast");
+  let toast=new bootstrap.Toast(toastEl,{delay:2000}); 
+  toast.show();
+}
+
+// ==== DARK MODE TOGGLE ====
+//document.getElementById("darkModeToggle").addEventListener("click",()=>{
+ // document.body.classList.toggle("dark-mode");
+//});
+
+// ==== MINI CART PREVIEW & CLICK ====
+const btnCarrinho=document.getElementById("btnCarrinho");
+const miniCart=document.getElementById("miniCart");
+const miniCartList=document.getElementById("miniCartList");
+
+// Hover → mini cart
+btnCarrinho.addEventListener("mouseenter",()=>{
+  miniCartList.innerHTML="";
+  carrinho.forEach(p=>miniCartList.innerHTML+=`<li>${p.nome} - €${p.preco}</li>`);
+  miniCart.style.display="block";
+});
+btnCarrinho.addEventListener("mouseleave",()=>miniCart.style.display="none");
+
+// Click → abrir modal completo
+btnCarrinho.addEventListener("click", abrirCarrinho);
+
+// ==== SKELETON LOADING ====
+setTimeout(()=>{ document.querySelectorAll(".card").forEach(card=>card.classList.remove("skeleton")); },800);
+
+// ==== INICIALIZAÇÃO ====
+atualizarCarrinho();
+
+</script>
+</body>
+</html>

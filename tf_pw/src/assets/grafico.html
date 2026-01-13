@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="pt">
+<head>
+  <meta charset="UTF-8">
+  <title>Gráfico Carteira</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+  <h2>Gráfico: Total de Compra vs Valor Atual</h2>
+  <canvas id="carteiraChart" width="800" height="400"></canvas>
+
+  <script>
+    window.onload = function () {
+      const ctx = document.getElementById('carteiraChart').getContext('2d');
+      new Chart(ctx, {
+        type: 'bar',
+        data: {
+          labels: ['Microsoft', 'TESLA', 'Amazon', 'Apple', 'Netflix', 'Nike', 'Spotify'],
+          datasets: [
+            {
+              label: 'Total Compra (€)',
+              data: [500, 400, 375, 300, 400, 560, 440],
+              backgroundColor: 'rgba(54, 162, 235, 0.6)',
+              borderColor: 'rgba(54, 162, 235, 1)',
+              borderWidth: 1
+            },
+            {
+              label: 'Valor Atual (€)',
+              data: [600, 360, 405, 200, 375, 640, 462],
+              backgroundColor: 'rgba(75, 192, 192, 0.6)',
+              borderColor: 'rgba(75, 192, 192, 1)',
+              borderWidth: 1
+            }
+          ]
+        },
+        options: {
+          responsive: true,
+          scales: {
+            y: {
+              beginAtZero: true
+            }
+          }
+        }
+      });
+    };
+  </script>
+</body>
+</html>
