@@ -22,16 +22,16 @@ projeto1: {
     titulo: "Barbearia NECA",
     descricao: "Desenvolvimento de uma plataforma digital completa para uma barbearia moderna. O projeto tem como principal objetivo melhorar a experiência do utilizador (UX), através de um design moderno, profissional e totalmente responsivo. O site inclui uma galeria de cortes de cabelo e barba, bem como uma interface simples e intuitiva para a consulta dos serviços disponíveis. Este projeto foi desenvolvido com o objetivo de integrar o meu portefólio pessoal, com especial atenção à performance, organização do conteúdo e estética visual, de forma a demonstrar as minhas competências na criação de uma presença digital apelativa e funcional para uma barbearia.",
     imagens: [
-        "imagens/painel1.png",
-        "imagens/painel2.png",
-        "imagens/painel3.png",
-        "imagens/painel4.png",
-        "imagens/painel5.png",
-        "imagens/painel6.png",
-        "imagens/painel7.png",
-        "imagens/painel8.png",
-        "imagens/painel9.png"
-    ],
+    "imagens/painel1.png",
+    "imagens/painel2.png",
+    "imagens/painel3.png",
+    "imagens/painel4.png",
+    "imagens/painel5.png",
+    "imagens/painel6.png",
+    "imagens/painel7.png",
+    "imagens/painel8.png",
+    "imagens/painel9.png"
+],
     link: "barbeiro/index.html"
 },
     projeto2: {
