@@ -24,7 +24,7 @@ const detalhesProjetos = {
         imagens: [
             "/imagens/barba1.png",
             "/imagens/barba2.png",
-            "/imagens/Captura de ecrã 2026-01-07 141452.png",
+            "/imagens/Captura-de-ecrã-2026-01-07-141452.png",
             "/imagens/Captura de ecrã 2026-01-07 141504.png",
             "/imagens/Captura de ecrã 2026-01-07 141512.png"
         ],
