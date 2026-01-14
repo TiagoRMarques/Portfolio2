@@ -18,18 +18,22 @@ let indexAtual = 0;
    DADOS DOS PROJETOS (COM TEXTOS COMPLETOS)
 ========================= */
 const detalhesProjetos = {
-    projeto1: {
-        titulo: "Barbearia NECA",
-        descricao: "Desenvolvimento de uma plataforma digital completa para uma barbearia moderna. O projeto tem como principal objetivo melhorar a experiência do utilizador (UX), através de um design moderno, profissional e totalmente responsivo. O site inclui uma galeria de cortes de cabelo e barba, bem como uma interface simples e intuitiva para a consulta dos serviços disponíveis. Este projeto foi desenvolvido com o objetivo de integrar o meu portefólio pessoal, com especial atenção à performance, organização do conteúdo e estética visual, de forma a demonstrar as minhas competências na criação de uma presença digital apelativa e funcional para uma barbearia.",
-        imagens: [
-            "/imagens/barba1.png",
-            "/imagens/barba2.png",
-            "/imagens/Captura-de-ecrã-2026-01-07-141452.png",
-            "/imagens/Captura de ecrã 2026-01-07 141504.png",
-            "/imagens/Captura de ecrã 2026-01-07 141512.png"
-        ],
-        link: "barbeiro/index.html"
-    },
+projeto1: {
+    titulo: "Barbearia NECA",
+    descricao: "Desenvolvimento de uma plataforma digital completa para uma barbearia moderna. O projeto tem como principal objetivo melhorar a experiência do utilizador (UX), através de um design moderno, profissional e totalmente responsivo. O site inclui uma galeria de cortes de cabelo e barba, bem como uma interface simples e intuitiva para a consulta dos serviços disponíveis. Este projeto foi desenvolvido com o objetivo de integrar o meu portefólio pessoal, com especial atenção à performance, organização do conteúdo e estética visual, de forma a demonstrar as minhas competências na criação de uma presença digital apelativa e funcional para uma barbearia.",
+    imagens: [
+        "imagens/painel1.png",
+        "imagens/painel2.png",
+        "imagens/painel3.png",
+        "imagens/painel4.png",
+        "imagens/painel5.png",
+        "imagens/painel6.png",
+        "imagens/painel7.png",
+        "imagens/painel8.png",
+        "imagens/painel9.png"
+    ],
+    link: "barbeiro/index.html"
+},
     projeto2: {
         titulo: "TFootShop",
         descricao: "Este projeto consiste num simulador de loja online focado na venda de equipamentos desportivos, oferecendo uma experiência de navegação fluida e intuitiva. A plataforma demonstra a implementação de um catálogo dinâmico com a integração de produtos associados às principais ligas europeias, permitindo uma organização visual clara e eficiente. O desenvolvimento destaca-se pela utilização avançada de lógica de programação para a gestão de um carrinho de compras em tempo real, um sistema personalizado de marcação de favoritos e filtros inteligentes por cada liga, garantindo que o utilizador encontre o seu clube de forma rápida e interativa.",
